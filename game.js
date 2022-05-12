@@ -2,6 +2,7 @@ const game = {
   numberOfCards: 20,
   matchedCardCount: 0,
   count: 3,
+  cards: document.querySelector('.game__cards'),
   card: document.querySelectorAll('.game__card'),
   clickedCard: null,
   clickedCard2: null,
@@ -22,10 +23,12 @@ const game = {
     game.flipCount--;
     if(game.flipCount === 0) {
       game.flipCount = 2;
+      game.cards.classList.add('no-event');
       game.control();
       setTimeout(() => {
         game.clickedCard.classList.remove('flipped');
         game.clickedCard2.classList.remove('flipped');
+        game.cards.classList.remove('no-event');
       },1000);
     }
   },
@@ -52,10 +55,10 @@ const game = {
     },1000);
   },
   over: () => {
-    document.querySelector('.game__cards').classList.add('no-event');
     setTimeout(() => {
       alert('Game over!');
-    },1000);
+      game.cards.classList.add('no-event');
+    },1001);
   }
 }
 document.addEventListener('DOMContentLoaded', game.init());
