@@ -1,3 +1,4 @@
+const test = true;
 const game = {
   numberOfCards: 20,
   matchedCardCount: 0,
