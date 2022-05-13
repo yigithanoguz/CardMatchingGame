@@ -2,13 +2,16 @@ const game = {
   numberOfCards: 20,
   matchedCardCount: 0,
   count: 3,
+  main: document.querySelector('main'),
   cards: document.querySelector('.game__cards'),
   card: document.querySelectorAll('.game__card'),
   clickedCard: null,
   clickedCard2: null,
   flipCount: 2,
+  rand: null,
   init: () => {
-    Array.from(game.card).forEach((value) => {
+    game.card.forEach((value) => {
+      game.shuffle(value);
       value.addEventListener('click', () => {
         if(game.flipCount == 1) {
           game.clickedCard2 = game.clickedCard;
@@ -17,6 +20,13 @@ const game = {
         game.rotate();
       });
     });
+  },
+  shuffle: (value) => {
+    game.random();
+    value.style.order = game.rand;
+  },
+  random: () => {
+    game.rand = Math.floor(Math.random() * 500);
   },
   rotate: () => {
     game.clickedCard.classList.add('flipped');
@@ -53,12 +63,22 @@ const game = {
     setTimeout(() => {
       alert('Tebrikler!');
     },1000);
+    game.finish();
   },
   over: () => {
     setTimeout(() => {
       alert('Game over!');
       game.cards.classList.add('no-event');
     },1001);
+    game.finish();
+  },
+  finish: () => {
+    // const footer = document.createElement('footer');
+    // const a = document.createElement('a');
+    // a.innerText = 'Try again';
+    // game.main.appendChild(footer);
+    // footer.classList.add('footer');
+    // footer.appendChild(a);
   }
 }
 document.addEventListener('DOMContentLoaded', game.init());
