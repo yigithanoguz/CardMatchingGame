@@ -36,7 +36,7 @@ const game = {
     if(game.clickedCard.getAttribute('data-animal') === game.clickedCard2.getAttribute('data-animal')) {
       return game.correct();
     }
-    game.count --;
+    game.count--;
     if(game.count === 0) {
       game.over();
     }
