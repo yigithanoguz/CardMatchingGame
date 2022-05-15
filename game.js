@@ -5,11 +5,14 @@ const game = {
   main: document.querySelector('main'),
   cards: document.querySelector('.game__cards'),
   card: document.querySelectorAll('.game__card'),
+  restartButton: document.querySelector('#restart'),
+  divCount: document.querySelector('#divCount'),
   clickedCard: null,
   clickedCard2: null,
   flipCount: 2,
   rand: null,
   init: () => {
+    game.divCount.innerHTML = `Remaining right: ${game.count}`;
     game.card.forEach((value) => {
       game.shuffle(value);
       value.addEventListener('click', () => {
@@ -20,6 +23,18 @@ const game = {
         game.rotate();
       });
     });
+  },
+  restart: () => {
+    game.matchedCardCount = 0;
+    game.count = 3;
+    game.divCount.innerHTML = `Remaining right: ${game.count}`;
+    game.cards.classList.remove('no-event');
+    game.cards.classList.remove('d-none');
+    game.restartButton.classList.add('d-none');
+    game.card.forEach((value) => {
+      game.shuffle(value);
+      value.classList.remove('has-match');
+    })
   },
   shuffle: (value) => {
     game.random();
@@ -47,6 +62,7 @@ const game = {
       return game.correct();
     }
     game.count--;
+    game.divCount.innerHTML = `Remaining right: ${game.count}`;
     if(game.count === 0) {
       game.over();
     }
@@ -62,23 +78,22 @@ const game = {
   win: () => {
     setTimeout(() => {
       alert('Tebrikler!');
+      game.finish();
     },1000);
-    game.finish();
   },
   over: () => {
     setTimeout(() => {
       alert('Game over!');
       game.cards.classList.add('no-event');
+      game.finish();
     },1001);
-    game.finish();
   },
   finish: () => {
-    // const footer = document.createElement('footer');
-    // const a = document.createElement('a');
-    // a.innerText = 'Try again';
-    // game.main.appendChild(footer);
-    // footer.classList.add('footer');
-    // footer.appendChild(a);
+    game.cards.classList.add('d-none');
+    game.restartButton.classList.remove('d-none');
+    if(game.restartButton.addEventListener('click', () => {
+      game.restart();
+    }));
   }
 }
 document.addEventListener('DOMContentLoaded', game.init());

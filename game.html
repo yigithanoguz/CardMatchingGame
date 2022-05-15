@@ -6,6 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Game</title>
+  <!-- yyy -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css">
   <style>
     * {
       box-sizing: border-box;
@@ -26,6 +28,9 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      
+      /* yyy */
+      position: relative;
     }
 
     .game__cards {
@@ -99,6 +104,18 @@
       color: #21a1e1;
       text-decoration: none;
     }
+
+    /* yyy */
+    .game__count {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+
+    /* .game__restart {
+
+    } */
+
   </style>
 </head>
 
@@ -1924,11 +1941,17 @@
         </div>
       </div>
 
-
+      <!-- yyy -->
+      <div class="alert alert-info game__count" role="alert" id="divCount"></div>
+      
     </section>
+    
+    <!-- yyy -->
+    <button type="button" class="btn btn-success d-none game__restart" id="restart">Try again</button>
 
   </main>
 
+  <!-- yyy -->
   <script src="game.js"></script>
 </body>
 
